@@ -9,7 +9,7 @@ public class SumNumbers {
         if(!str.matches(".*\\d+.*")){
             return 0;
         }
-        String numbers = str.replaceAll("[\\D]+", " ");
+        String numbers = str.replaceAll("\\D+", " ");
 
         return Arrays.asList(numbers.trim().split(" "))
                 .stream()
