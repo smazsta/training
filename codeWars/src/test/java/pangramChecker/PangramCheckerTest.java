@@ -1,4 +1,4 @@
-package panagramChecker;
+package pangramChecker;
 
 import org.junit.Test;
 

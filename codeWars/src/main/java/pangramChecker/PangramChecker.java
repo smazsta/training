@@ -1,4 +1,4 @@
-package panagramChecker;
+package pangramChecker;
 
 import java.util.stream.Stream;
 
