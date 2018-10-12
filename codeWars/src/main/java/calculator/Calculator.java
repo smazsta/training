@@ -5,7 +5,10 @@ import java.util.Arrays;
 public class Calculator {
 
     public double getTotalArea(Calculable... calculable){
-        double totalArea = Arrays.stream(calculable).mapToDouble(Calculable::getArea).sum();
+        double totalArea = Arrays.stream(calculable)
+                .mapToDouble(Calculable::getArea)
+                .sum();
+
         return (double) Math.round(totalArea * 100) / 100;
     }
 }
