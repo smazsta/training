@@ -1,42 +1,28 @@
 package nextBiggerNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Kata {
 
     public static long nextBiggerNumber(long n) {
-        System.out.println(n);
-        List<Long> numbersList = permutation(String.valueOf(n));
-        Collections.sort(numbersList);
-        long indexOfN = numbersList.indexOf(new Long(n));
-        if(indexOfN == numbersList.size()){
-            return -1;
-        } else {
-            return numbersList.get((int)indexOfN + 1);
+
+        int[] numberDigits = Long.toString(n).chars().map(c -> c-'0').toArray();
+        int i = numberDigits.length - 1;
+        while(i != 0 && numberDigits[i] < numberDigits[i-1]){
+            i--;
         }
-    }
 
-    public static List<Long> permutation(String input) {
-        List<Long> numbersList = new ArrayList<>();
-        numbersList = permutation(numbersList, "", input);
-        return numbersList;
-    }
+        String c = Arrays.stream(Long.toString(n).substring(i).split(""))
+                .sorted()
+                .collect(Collectors.joining());
 
-    private static List<Long> permutation(List<Long> numbersList, String perm, String word) {
-        if (word.isEmpty() && !numbersList.contains(Long.parseLong(perm + word))) {
-            numbersList.add(Long.parseLong(perm + word));
-        } else {
-            for (int i = 0; i < word.length(); i++) {
-                permutation(numbersList, perm + word.charAt(i), word.substring(0, i) + word.substring(i + 1));
-            }
-        }
-        return numbersList;
-    }
+        String preDigits = Long.toString(n).substring(0, i-1);
+        String middleDigits = c.substring(0,1) + Long.toString(numberDigits[i-1]);
+        String postDigits = c.substring(1);
 
-    public static void main(String args[]) {
-        permutation("123");
+        return Long.parseLong(preDigits + middleDigits + postDigits);
     }
 
 }
