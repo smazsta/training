@@ -20,6 +20,15 @@ public class DinglemouseTest {
     }
 
     @Test
+    public void singleWord() {
+        final String input = "giraffe";
+        final String[] expected = {
+                "giraffe",
+                "giraffe"};
+        assertArrayEquals(expected, Dinglemouse.whoEatsWho(input));
+    }
+
+    @Test
     public void eatRightMulti() {
         final String input = "giraffe,leaves,leaves,leaves,bear,bug,leaves,leaves,panda";
         final String[] expected = {
@@ -30,7 +39,7 @@ public class DinglemouseTest {
                 "bear eats bug",
                 "bear eats leaves",
                 "bear eats leaves",
-                "giraffe, bear, panda"};
+                "giraffe,bear,panda"};
         assertArrayEquals(expected, Dinglemouse.whoEatsWho(input));
     }
 
@@ -48,12 +57,8 @@ public class DinglemouseTest {
 
     @Test
     public void random() {
-        final String input = "Random Test #1: ZOO = panda,big-fish,sheep,leaves,little-fish\n" +
-                "\tpanda,big-fish,sheep,leaves,little-fish\n" +
-                "panda,big-fish,sheep,leaves,little-fish";
-        final String[] expected = {
-                "panda,big-fish,sheep,leaves,little-fish,panda,big-fish,sheep,leaves,little-fish,panda,big-fish,sheep,leaves,little-fish",
-                "panda,big-fish,sheep,leaves,little-fish,panda,big-fish,sheep,leaves,little-fish,panda,big-fish,sheep,leaves,little-fish"};
+        final String input = ", ";
+        final String[] expected = {" "};
         assertArrayEquals(expected, Dinglemouse.whoEatsWho(input));
     }
 
@@ -73,12 +78,11 @@ public class DinglemouseTest {
     public void eatLeftSingle() {
         final String input = "chicken,fox,leaves,bug,grass,sheep";
         final String[] expected = {
-                "fox,bug,chicken,grass,sheep",
-                "chicken eats bug",
+                "chicken,fox,leaves,bug,grass,sheep",
                 "fox eats chicken",
+                "bug eats leaves",
                 "sheep eats grass",
-                "fox eats sheep",
-                "fox"};
+                "fox,bug,sheep"};
         assertArrayEquals(expected, Dinglemouse.whoEatsWho(input));
     }
 
